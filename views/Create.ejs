@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Says</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            width: 50%;
+        }
+
+        form input{
+            margin-top: 20px;
+            border: none;
+            border-bottom: 1px solid black;
+        }
+
+        form [type="submit"]{
+            width: 200px;
+            height: 30px;
+            background-color: blueviolet;
+            color: white;
+            border-radius: 30px;
+            border: none;
+            margin: auto;
+            margin-top: 20px;
+
+        }
+
+        .all-content{
+            width: 60%;
+            margin: auto;
+            text-align: center;
+        }
+
+        #search{
+            border: 1px solid black;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 50px;
+            border-radius: 20px;
+        }
+
+        input[type="search"]{
+            width: 50%;
+            padding: 5px;
+            text-align: center;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .related-books{
+            width: 60%;
+            margin: auto;
+        }
+
+        #add_book{
+            border: 1px solid black;
+            border-radius: 20px;
+            padding: 50px;
+            
+        }
+
+        #add_book input{
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #add_book label{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        [type="date"]{
+            width: 200px;
+            margin: auto;
+        }
+
+        [type="number"]{
+            width: 100px;
+            margin: auto;
+        }
+
+        h2{
+            font-size: 50px;
+        }
+
+
+        ul li{
+            list-style-type: none;
+        }
+
+        img{
+            width: 150px;
+            height: 200px;
+        }
+
+        @media screen and (max-width: 756px){
+            .all-content{
+                width: 100%;
+            }
+
+            .related-books{
+                margin: auto;
+                width: 80%;
+            }
+
+            form{
+                width: 60vw;
+            }
+
+            #add_book input {
+                width: 100px;
+                margin: auto;
+                margin-top: 20px;
+            
+            }
+
+            img{
+                width: 100px;
+                height: 200px;
+            }
+
+
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="all-content">
+
+        <h2>I've Read</h2>
+        <hr>
+        <form action="/search" method="post" id="search">
+            <label for="search"><b>Search the book By ISBN or Name:</b></label>
+            <input type="search" name="search">
+            <input type="submit" value="Search">
+        </form>
+        <% if (locals.books){ %>
+            
+                <div class="related-books">
+                    <ul style="display: flex; flex-direction: column; width: 100%; height: 30vh; overflow: auto;margin-top: 20px; margin-bottom: 20px; padding: 20px; border: 1px solid black; border-radius: 20px;">
+                        <% books.forEach(book => { %>
+                            <div style="display: flex; width: 100%;">
+                                <li style="display: flex; width: 100%;">
+                                    <a href="#" onclick="fetchbook('<%= title %>', '<%= book.cover_i %>', '<%= book.isbn && book.isbn.length > 0 ? book.isbn[0] : 0 %>')" style="display: flex;">
+                                        <img src="https://covers.openlibrary.org/b/id/<%= book.cover_i %>-M.jpg" alt="book-cover">
+                                        <span style="display: flex; flex-direction: column; margin-top: 50px; margin-left: 10px;">
+                                            <span><%= title %></span>
+                                            <span>ISBN-<%= book.isbn && book.isbn.length > 0 ? book.isbn[0] : 'N/A' %></span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </div>
+
+                        <% }); %>
+                    </ul>
+                </div>
+            
+        <% } %>
+
+        <% if (book_details){ %>
+            <form action="/update_book/<%= book_details.book_name %>/<%= book_details.user_id %>" id="add_book" method="post">
+                <label for="book_name">Book Name</label>
+                <input type="text" value="<%= book_details.book_name %>" name="book_name" id="book_name" required>
+                <label for="name">Author Name:</label>
+                <input type="text" name="author_name" value="<%= book_details.author_name %>" style="border: none; border-bottom: 1px solid black;" required>
+                <label for="ISBN">ISBN No:</label>
+                <input type="text" id="isbn" name="isbn" value="<%= book_details.isbn %>>" style="border: none; border-bottom: 1px solid black;" required>
+                <label for="description">Book Description:</label>
+                <textarea name="description" id="description" cols="30" rows="10" style="padding: 20px; border-start-end-radius: 20px"  required><%= book_details.description %></textarea>
+                <label for="notes">Your Notes:</label>
+                <textarea name="my_notes" id="my_notes" class="my_notes" cols="30" rows="10" style="padding: 20px;"><%= book_details.notes %></textarea>
+                
+            
+                <label for="cover">Cover Image:</label>
+                <input type="number" name="cover" id="cover" value="<%= book_details.cover %>">
+                <label for="date">Date:</label>
+                <input type="date" name="date" value="<%= book_details.date %>" required>
+                <label for="rating">How much you recommend the book:</label>
+                <input type="number" name="rating" value="<%= book_details.rating %>" min="1" max="10">
+                <input type="submit" value="Update">
+                
+            </form>
+        <% }else{ %>
+            <form action="/create" id="add_book" method="post">
+                <label for="book_name">Book Name</label>
+                <input type="text" placeholder="Book Name" name="book_name" id="book_name">
+                <label for="name">Author Name:</label>
+                <input type="text" name="author_name" placeholder="Author Name" style="border: none; border-bottom: 1px solid black;" required>
+                <label for="ISBN">ISBN No:</label>
+                <input type="text" id="isbn" name="isbn" placeholder="ISBN" style="border: none; border-bottom: 1px solid black;" required>
+                <label for="description">Book Description:</label>
+                <textarea name="description" id="description" cols="30" rows="10" style="padding: 20px; border-start-end-radius: 20px" placeholder="Tell me about your book" required></textarea>
+                <label for="notes">Your Notes:</label>
+                <textarea name="my_notes" id="my_notes" class="my_notes" cols="30" rows="10" placeholder="What do you think about this book" style="padding: 20px;"></textarea>
+                
+                
+                
+                <label for="cover">Cover Image:</label>
+                <input type="number" name="cover" id="cover" placeholder="cover_id">
+                <label for="date">Date:</label>
+                <input type="date" name="date" required>
+                <label for="rating">How much you recommend the book:</label>
+                <input type="number" name="rating" min="1" max="10">
+                <input type="submit" value="Collect">
+                
+            </form>
+        <% } %>
+
+    </div>
+    
+    <!-- <script>
+        CKEDITOR.replace( 'your_notes' );
+    </script> -->
+    <script src="../public/ckeditor/ckeditor.js">
+        CKEDITOR.replace('my_notes');
+    </script>
+    
+    <script>
+        function fetchbook(name, cover, isbn){
+            document.getElementById("book_name").value = name;
+            document.getElementById("isbn").value = isbn;
+            document.getElementById("cover").value = cover;
+        }
+
+        CKEDITOR.replace('my_notes');
+        
+    </script>
+    
+</body>
+</html>

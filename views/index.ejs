@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Says</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles.css">
+    
+</head>
+<body>
+    <h1>Book Says</h1>
+    <hr>
+    <nav>
+        <form action="/search_author" method="post">
+            <input type="search" name="search_me" id="search_user" style="border: none; border-bottom: 1px solid rgba(56, 53, 53, 0.075); text-align: center; margin-left: 100px; background: url('/images/search-icon.svg') no-repeat left center;
+            " placeholder="Search User">
+            <input type="submit" class="visually-hidden">
+        </form>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+
+    </nav>
+
+    <section id="carousel">
+        <h2 class="my_read">My Readed Books Collection</h2>
+        <p class="head-description">A Collection Of Our Random Book Readings</p>
+    </section>
+
+    <% if (users && users.length > 0){ %>
+        <% users.forEach(user => { %>
+            <div class="container">
+                <div class="card">
+
+                        <h2><%= user.name %></h2>
+                        <p class="book-collection">Collection Name: <%= user.collection %></p>
+                        <p><%= user.about %></p>
+                        <p class="read-it"><a href="/collection/<%= user.id %>">Books I've Read</a></p>
+                    
+                </div>
+            </div>
+        <% }); %>
+    <% }else{ %>
+        <% if(no_users){ %>
+            <p>No user with this username</p>
+        <% }else{ %>
+            <p style="font-size: 30px; margin: auto;">No Entries Yet.</p>
+        <% } %>
+    <% } %>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Says</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .sub-details{
+            margin-top: -10px;
+            font-size: 10px;
+        }
+    </style>
+    
+</head>
+<body>
+    <main>
+        <a href="/collection/<%= my_book.user_id %>">Go Back</a>
+        <% if(isAuthenticated){ %>
+            <a href="/logout" style="float: right; margin-right: 20px;">Logout</a>
+        <% } %>
+
+        <h2 class="author-name"><%= username %></h2>
+        <div class="Readed_book">
+            <div class="book-img">
+                <img src="https://covers.openlibrary.org/b/id/<%= my_book.cover %>-L.jpg" alt="book_name" class="book-cover">
+            </div>
+            <div class="readed-book-details">
+                <h2 class="heading">BookName-<%= my_book.book_name %></h2>
+                <p class="sub-details">ISBN: <%= my_book.isbn %></p>
+                <p class="sub-details">Date Read:  <%= new Date(my_book.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+                <p class="sub-details">My Personal Rating: <%= my_book.rating %>/10</p>
+                
+            </div>
+        </div>
+        <p style="margin-top: 40px; margin-bottom: 40px;"><%= my_book.description %></p>
+        <hr>
+        <h3 style="margin-top: 100px; margin-bottom: 50px;">My Notes</h3>
+        <p><%= my_book.notes %></p>
+        <% if(isAuthenticated){ %>
+            <a href="/update_book/<%= my_book.book_name %>/<%= my_book.user_id %>">Update</a>
+            <a href="/delete/<%= my_book.book_name %>/<%= my_book.user_id %>">Delete</a>
+        <% } %>
+    </main>
+     
+</body>
+</html>

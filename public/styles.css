@@ -1,0 +1,200 @@
+h1{
+    text-align: center;
+    font-size: 100px;
+}
+
+nav{
+    width: 100vw;
+    /* position: fixed; */
+    display: flex;
+    height: 100px;
+    background-color: white;
+    align-items: center;
+}
+
+ul{
+    display: flex;
+    margin: auto;
+    margin-right: 200px;
+}
+
+ul li{
+    margin-left: 20px;
+    list-style-type: none;
+    padding: 10px;
+}
+
+ul li:hover{
+    background-color: black;
+}
+
+
+ul li a{
+    text-decoration: none;
+    color: black;
+    font-size: medium;
+
+}
+
+ul li a:hover{
+    background-color: black;
+    color: white;
+}
+
+h1{
+    color: black;
+}
+
+main{
+    width: 60%;
+    margin: auto;
+}
+
+#carousel {
+    position: relative;
+    padding: 20px;
+    color: #071952; /* Text color for visibility against background */
+    text-align: center;
+    height: 50vh;
+    width: 100vw;
+    margin-top: 50px;
+    align-content: center;
+    overflow: hidden;
+    }
+      
+#carousel::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-image: url('https://www.shutterstock.com/image-photo/workplace-winter-background-keayboard-notebook-260nw-713073412.jpg'); /* Replace with your image URL */
+background-size: cover;
+background-position: center;
+opacity: 0.5; /* Desired opacity */
+z-index: 0; /* Ensure it is behind the content */
+}
+      
+#carousel .my_read,
+#carousel .head-description {
+position: relative;
+z-index: 1; /* Ensure content is above the background image */
+}
+
+.my_read{
+    font-size: 50px;
+}
+
+/* .head-description{
+    text-align: center;
+} */
+
+.container{
+    width: 60vw;
+    padding: 50px;
+    margin: auto;
+}
+
+.card{
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 80%;
+    margin: auto;
+    margin-top: 100px;
+    padding: 50px;
+    text-align: center;
+}
+
+.book-collection{
+    color: grey;
+}
+
+.read-it a{
+    text-decoration: none;
+}
+
+.alies{
+    text-align: center;
+    margin-top: -50px;
+    margin-bottom: 50px;
+}
+
+.Readed_book{
+    display: flex;
+    margin-top: 100px;
+}
+
+.heading{
+    font-size: 40px;
+
+}
+
+.sub-heading{
+    margin-top: -20px;
+    color: grey;
+}
+
+.readed-book-details{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+.book{
+    position: relative;
+    width: 100%;
+    height: 150px;
+    margin-top: 40px;
+}
+
+.book-cover{
+    width: 250px;
+    height: 300px;
+}
+
+.author-name{
+    font-size: 70px;
+}
+
+
+@media only screen and (max-width: 756px){
+    .author-name{
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .book-cover{
+        width: 100px;
+        height: 150px;
+        margin-top: 50px;
+    }
+
+    .heading{
+        font-size: 30px;
+    }
+
+    nav{
+        display: flex;
+        flex-direction: column;
+       
+    }
+
+  
+
+    nav ul{
+        margin: auto
+    }
+
+    .container{
+        width: 100vw;
+    }
+
+    .card{
+        width: 100%;
+    }
+}
+
+
+
+

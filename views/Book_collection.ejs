@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Says</title>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        .book{
+            width: 7rem;
+        }
+
+        @media screen and (max-width: 756px){
+            
+            h1{
+                font-size: 50px;
+                margin-bottom: 60px;
+            }
+
+            .book{
+                width: 100px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <% if(isAuthenticated){ %>
+            <a href="/logout">Logout</a>
+        <% }else{ %>
+            <a href="/">Go Back</a>
+        <% } %>
+        <h1><%= name %></h1>
+        <h3 class="alies">Books I've Read</h3>
+        <p>Tiny summary but <strong>detailed notes for each</strong>. Use the ISBN number to find it from your local library or anywhere else. <strong>This page will constantly update as I read more</strong>, so bookmark it if you want to check back in a few months.</p>
+        <hr style="margin-top: 20px; margin-bottom: 20px">
+
+        <div class="Readed_book" style="display: flex; flex-direction: column;">
+            <% if (book_details && book_details.length > 0){ %>
+                <% book_details.forEach(book => { %>
+                    <div style="display: flex; margin-top: 50px;">
+                        <div class="book-img">
+                            <img src="https://covers.openlibrary.org/b/id/<%= book.cover %>-M.jpg" alt="book_name" class="book">
+                        </div>
+                        <div class="readed-book-details">
+                            
+                            <h2 class="heading"><%= book.book_name %>-<%= book.author_name %></h2>
+                            <p class="sub-heading">Date Read:  <%= new Date(book.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>.<br> My personal rating: <%= book.rating %>/10</p>
+                            <p><%= book.description %></p>
+                            <a href="/book_read/<%= book.id %>" style="text-decoration: none;">Read My Notes</a>
+                            <% if(isAuthenticated){ %>
+                                <a href="/delete/<%= book.book_name %>/<%= book.user_id %>">Delete</a>
+                                <a href="/update_book/<%= book.book_name %>/<%= book.user_id %>">Update Book</a>
+                            <% } %>
+                            
+                        </div>
+                    </div>
+                <% }); %>
+            <% }else{ %>
+                <p style="font-size: 30px; margin: auto;">No Books Read Yet.</p>
+            <% } %>
+            
+        </div>
+        <% if(isAuthenticated){ %>
+            <a href="/create">Create New</a>
+            
+        <% } %>
+    </main>
+
+ 
+
+    
+</body>
+</html>

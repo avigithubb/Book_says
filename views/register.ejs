@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Says</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .Register-info{
+            display: flex;
+        }
+
+        .Register-pic{
+            width: 50vw;
+            height: 100vh;
+        }
+
+        .Register-img{
+            width: 50vw;
+            height: 100vh;
+        }
+
+        .main-content{
+            width: 50vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        form{
+            width: 25%;
+            padding: 20px;
+            align-items: center;
+            text-align: center;
+
+        }
+
+        form [type="submit"]{
+            background-color: green;
+            color: white;
+            font-weight: 800;
+            width: 200px;
+            height: 50px;
+            border-radius: 20px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        form [type="submit"]:hover{
+            background-color: greenyellow;
+            color: white;
+        }
+
+       .hr{
+        width: 60%;
+        height: 5px;
+        margin: auto;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        background-color: black;
+       }
+
+       p{
+        color: grey;
+        margin-top: -20px;
+       }
+
+       h2{
+        font-size: 50px;
+       }
+
+       form input{
+        margin-top: 20px;
+        padding: 10px;
+        text-align: center;
+        border: none;
+        border-bottom: 1px solid black;
+
+       }
+
+       nav{
+        display: flex;
+        position: fixed;
+        top: 0;
+        width: 46vw;
+       }
+
+       nav a{
+        position: relative;
+        left: 90%;
+        text-decoration: none;
+        color: black;
+       }
+        
+       nav a:hover{
+        color: blue;
+       }
+
+       @media screen  and (max-width: 756px){
+        .Register-pic{
+            display: none;
+        }
+
+        .main-content{
+            width: 100vw;
+            justify-content: center;
+            text-align: center;
+
+        }
+
+        form{
+           margin-left: -100px;
+        }
+
+       }
+        
+
+
+    </style>
+</head>
+<body>
+
+    <div class="Register-info">
+        <div class="Register-pic">
+            <img src="images/roberta-errani-knTUUJ8iP2U-unsplash.jpg" alt="register-img" class="Register-img">
+        </div>
+        <div class="main-content">
+            <nav>
+                <a href="/login">Login</a>
+            </nav>
+            <h2>Create Your Account</h2>
+            <p >Welcome to Book Says<br>Plz enter your Details</p>
+            <div class="hr"></div>
+            <form action="/register" method="post">
+                <input type="text" placeholder="Your Name" name="name" required>
+                <input type="text" placeholder="Username" name="username" required>
+                <input type="email" placeholder="Email" name="email" required>
+                <input type="password" name="password" id="psw" placeholder="Password" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                <input type="text" name="collection" placeholder="Collection Name">
+                <input type="text" name="about" placeholder="About yourself in few words">
+                <input type="submit" value="Let me Read">
+            </form>
+        </div>
+
+    </div>
+    
+</body>
+</html>
